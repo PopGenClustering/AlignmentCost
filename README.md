@@ -39,7 +39,7 @@
   python -m AlignmentCost.main -input_file PATH_TO_YOUR_FILE -R NUM_OF_REP -perm_file PATH_TO_ALIGNMENT_RESULTS -output_path PATH_TO_OUTPUT
   ```
   where 
-  1. ```PATH_TO_YOUR_FILE``` points to a space-delimited input file in the same format as the exemplary file  ```data/all_indfile.txt```. It should contain 5+K columns, where K is the number of clusters in the replicates. It follows the *CLUMPP* individual input file format.
+  1. ```PATH_TO_YOUR_FILE``` points to a space-delimited input file in the same format as the exemplary file  [```data/all_indfile.txt```](data/all_indfile.txt). It should contain 5+K columns, where K is the number of clusters in the replicates. It follows the *CLUMPP* individual input file format.
   2. ```NUM_OF_REP``` is the number of replicates
   3. ```PATH_TO_ALIGNMENT_RESULTS``` points to a space-delimited file containing the correct permutations (alignment) with respect to the first replicate. Each row corresponds to the permutation of one replicate, and each column corresponds to a cluster. The first row should always be ```1 2 ... K```. This can be extracted from the *CLUMPP* individual miscellaneous statistics file.
   4. ```PATH_TO_OUTPUT``` points to the directory where you want to save the figures.
@@ -53,5 +53,7 @@
     python -m AlignmentCost.main --input_file="data/codis_indfile.txt" --R=10 --perm_file="data/codis_clumpp_results.txt" --output_path="output/codis" 
     ```
 
+## Demo 
 
+A demo notebook is available [here](Alignment_Cost_Demo.ipynb).
 
