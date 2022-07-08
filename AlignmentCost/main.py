@@ -4,7 +4,6 @@ Main Script
 @author: Xiran Liu 
 """
 
-#%% Imports
 import os
 import numpy as np
 import pandas as pd
@@ -27,7 +26,7 @@ def main(args):
     df_ind = pd.read_csv(input_file, delimiter=r"\s+", header = None)
     df_ind = df_ind.rename(columns={1:"indID",3:"popID"})
     N = df_ind["indID"].nunique()
-    K = df_ind.shape[1]-5
+    K = df_ind.shape[1]-5 # number of individuals
     
     popIDs = df_ind["popID"].unique()
     if N*R!=len(df_ind):
@@ -305,8 +304,5 @@ if __name__ == "__main__":
     parser.add_argument('--perm_file', type=str, required=True, help="path to permutation file")
     parser.add_argument('--output_path', type=str, required=False, help="path to save outputs")
     
-    # for opt_arg in optional_arguments: 
-    #     parser.add_argument('--{}'.format(opt_arg[0]), type=getattr(builtins, opt_arg[1]), required=False, help=opt_arg[2])
-
     args = parser.parse_args()
     main(args)

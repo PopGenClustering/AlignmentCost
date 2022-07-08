@@ -71,7 +71,6 @@ def repdist(a,b):
     temp3 = np.sum(np.multiply(a_sub,b_sub))+np.sum(a_sub)*np.sum(b_sub)
     return 2*(temp1/((a0+1)*a0)+temp2/((b0+1)*b0)-temp3/(a0*b0))
 
-
 def repdist0(a):
     a0 = np.sum(a)
     return 4*np.sum(np.tril(np.outer(a,a),-1))/((a0+1)*(a0**2))
@@ -79,6 +78,3 @@ def repdist0(a):
 def alignment_cost(a,b):
     a0 = np.sum(a)
     return 0.5*np.sum(np.multiply(a,a-b))*2/a0**2
-
-# def cost_general(a,b):
-#     return 0.5*(repdist(a,b)-repdist0(a))
