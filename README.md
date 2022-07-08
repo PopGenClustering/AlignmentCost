@@ -47,7 +47,7 @@
   
   Examples:
     ```
-    python -m AlignmentCost.main -input_file data/all_indfile.txt -R 10 -perm_file data/all_clumpp_results.txt -output_path output/all
+    python -m AlignmentCost.main --input_file data/all_indfile.txt --R 10 --perm_file data/all_clumpp_results.txt --output_path output/all
     ```
     ```
     python -m AlignmentCost.main --input_file="data/codis_indfile.txt" --R=10 --perm_file="data/codis_clumpp_results.txt" --output_path="output/codis" 
