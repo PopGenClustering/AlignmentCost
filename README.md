@@ -2,7 +2,7 @@
 
 ## Contents
 
-This folder contains all datasets used as examples as well as code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article "A Dirichlet model of alignment cost in mixed-membership unsupervised clustering". 
+This folder contains all datasets used as examples as well as code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
 
 **data** folder contains four data files taken from the Supplementary materials of Fortier et al. 2020 that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the first replicates of both datasets follow the same pattern as Fig. 2 of Fortier et al. 2020.  
  * *all_indfile.txt* and *codis_indfile.txt* are adapted from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of Fortier et al. 2020 Supplementary. 
