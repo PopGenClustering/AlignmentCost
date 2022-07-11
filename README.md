@@ -4,16 +4,20 @@
 
 This folder contains all datasets used as examples as well as code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
 
-**data** folder contains four data files taken from the Supplementary materials of Fortier et al. 2020 that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the first replicates of both datasets follow the same pattern as Fig. 2 of Fortier et al. 2020.  
+The **data** folder contains four data files taken from the Supplementary materials of Fortier et al. 2020 that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the first replicates of both datasets follow the same pattern as Fig. 2 of Fortier et al. 2020.  
  * *all_indfile.txt* and *codis_indfile.txt* are adapted from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of Fortier et al. 2020 Supplementary. 
  * *all_clumpp_results.txt* and *codis_clumpp_results.txt* are takend from *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files.
 
-**AlignmentCost** folder contains the code files: *fund_utils.py* and *main.py*.
+The **AlignmentCost** folder contains the code files: *fund_utils.py* and *main.py*.
  * *fund_utils.py* contains several helper functions for data analysis and visualization, including 
    * ```repdist(a,b)``` which implements Eq. 10 in the article,
    * ```repdist0(a)``` which implements Eq. 11,
    * and ```alignment_cost(a,b)``` which implements Eq. 12.
  * *main.py* contains the major code we use to analyze the datasets and produce the plots in Fig. 5 and 6. It also serves as the main body of the Python package.
+
+The **scripts** folder contains the parameter files used for the examples (more details in the next section), as well as a sample bash script with the command line argument.
+
+The **output** folder will be automatically generated if run the provided examples. Figures will be output to this folder.
 
 ## Usage
 
