@@ -1,0 +1,6 @@
+input_file: "data/all_indfile.txt"
+perm_file: "data/all_clumpp_results.txt"
+output_path: "output/all"
+R: 10
+vmax: 1.0
+cost_vs_perm_label_above_bar: False

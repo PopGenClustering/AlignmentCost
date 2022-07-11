@@ -18,10 +18,24 @@ from AlignmentCost.func_utils import *
 
 def main(args):
 
-    
-    input_file = args.input_file
-    R = args.R # number of replicates
-    perm_file = args.perm_file
+    # param_file = "AlignmentCost/scripts/all_param.txt"
+    param_file = args.param_file
+
+    with open(param_file) as f:
+        param_lines = f.read().splitlines() 
+
+    # params = dict()
+    for line in param_lines:
+        if line:
+            name = line.split(": ")[0]
+            val = line.split(": ")[1]
+            print(name,val)
+            exec("{} = {}".format(name,val), globals())
+
+    print(input_file)
+    # input_file = args.input_file
+    # R = args.R # number of replicates
+    # perm_file = args.perm_file
 
     df_ind = pd.read_csv(input_file, delimiter=r"\s+", header = None)
     df_ind = df_ind.rename(columns={1:"indID",3:"popID"})
@@ -31,21 +45,28 @@ def main(args):
     popIDs = df_ind["popID"].unique()
     if N*R!=len(df_ind):
         sys.exit('ERROR: total number of rows in the file does not equal N*R. \nPlease check if all replicates contain memberships of the same individuals.')
-
     
-    if args.output_path:
-        output_path = args.output_path 
-    else:
-        output_path = "output"
+    # if args.output_path:
+    #     output_path = args.output_path 
+    # else:
+    #     output_path = "output"
     
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     
 
+    # plot barcharts of the memberships of all replicates (Fig. 5 and 6 Panel A)
+    if K==4:
+        colors = [(1, 0.4, 0),(0, 0.6, 0.9),(1, 0.6, 0.9),(0.5, 0, 0.5)]
+    else:
+        cmap = matplotlib.cm.get_cmap('Spectral')
+        colors = [cmap(i)[:3] for i in np.linspace(0,1,K)]
+    plot_bar(R, N, K, popIDs, df_ind, colors=colors, save_path=os.path.join(output_path,"all_reps.pdf"))
+
+    # load ground-truth permutation
     perm_results = np.loadtxt(perm_file).astype(int).tolist()
 
-
-    # compute permutation w.r.t. each of the replicates
+    # obtain permutation w.r.t. each of the replicates
     perm_wrt = [[[perm.index(i) for i in perm_results[k]] for perm in perm_results] for k in range(R)]
     
     # get number of individuals in each population 
@@ -57,8 +78,7 @@ def main(args):
         n_ind = len(idx)
         n_ind_list.append(n_ind)
 
-
-    # MLE of Dirichlet parameters
+    # perform MLE of Dirichlet parameters
     a_list_all = []
 
     for r in range(R):
@@ -130,90 +150,28 @@ def main(args):
 
     # average theoretical costs of rep1 w.r.t rep2 and rep2 w.r.t. rep1
     pw_cost_the = (pw_cost_the+pw_cost_the.T)/2
-
-    mask = np.zeros_like(pw_cost_emp, dtype=bool)
-    mask[np.triu_indices_from(mask,k=1)] = True
     
-    
-    # plot pairwise theoretical cost
+    # plot pairwise theoretical cost (Fig. 5 and 6 Panel B)
     cm = plt.get_cmap("YlOrBr")
+    plot_heatmap(R=R, matrix=pw_cost_the, vmax=vmax, labelpad=-80, labelsize=20, cmap=cm, title='Theoretical cost', 
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"the_cost.pdf"))
 
-    fig, ax = plt.subplots(1,1, figsize=(6,5))
-
-    sns.heatmap(pw_cost_the, cmap=cm, robust=True, square=True,
-                linewidths=0.1, linecolor='white', vmin=0, vmax=1,
-                annot=pw_cost_the, annot_kws={'fontsize': 11}, fmt='.2f',
-                cbar_kws={'label': 'theoretical costs'},mask=mask, )
-    ax.set_xlabel("Replicate", fontsize=15)
-    ax.set_ylabel("Replicate", fontsize=15)
-    cbar = ax.collections[0].colorbar
-    cbar.set_label('Theoretical cost', labelpad=-60, fontsize=15)
-    cbar.ax.tick_params(labelsize=13)
-
-    ax.set_xticks([i+0.5 for i in range(R)])
-    ax.set_xticklabels(range(1,R+1), fontsize=13)
-    ax.set_yticks([i+0.5 for i in range(R)])
-    ax.set_yticklabels(range(1,R+1), fontsize=13)
-
-    pass
-    fig.savefig(os.path.join(output_path,"the_cost.pdf"), bbox_inches='tight', format='pdf', dpi=200, transparent=True) #svg
-    
-
-    # plot pairwise empirical cost
+    # plot pairwise empirical cost (Fig. 5 and 6 Panel C)
     cm = plt.get_cmap("YlOrBr")
+    plot_heatmap(R=R, matrix=pw_cost_emp, vmax=vmax, labelpad=-80, labelsize=20, cmap=cm, title='Empirical cost', 
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"emp_cost.pdf"))
 
-    fig, ax = plt.subplots(1,1, figsize=(6,5))
-
-    sns.heatmap(pw_cost_emp, cmap=cm, robust=True, square=True,
-                linewidths=0.1, linecolor='white', vmin=0, vmax=1,
-                annot=pw_cost_emp, annot_kws={'fontsize': 11}, fmt='.2f',
-                cbar_kws={'label': 'empirical costs'},mask=mask)
-    ax.set_xlabel("Replicate", fontsize=15)
-    ax.set_ylabel("Replicate", fontsize=15)
-    cbar = ax.collections[0].colorbar
-    cbar.set_label('Empirical cost', labelpad=-60, fontsize=15)
-    cbar.ax.tick_params(labelsize=13)
-
-    ax.set_xticks([i+0.5 for i in range(R)])
-    ax.set_xticklabels(range(1,R+1), fontsize=13)
-    ax.set_yticks([i+0.5 for i in range(R)])
-    ax.set_yticklabels(range(1,R+1), fontsize=13)
-
-    pass
-
-    fig.savefig(os.path.join(output_path,"emp_cost.pdf"), bbox_inches='tight', format='pdf', dpi=200, transparent=True) #svg
-    
-    # plot different between empirical and theoretical costs
+    # plot different between empirical and theoretical costs  (Fig. 5 and 6 Panel D)
     cm = plt.get_cmap("GnBu")
-
     abs_diff = np.abs(pw_cost_emp-pw_cost_the)
     rel_diff = np.divide(abs_diff, pw_cost_the, out=np.zeros_like(abs_diff), where=abs(pw_cost_the)>1e-6)
 
-    fig, ax = plt.subplots(1,1, figsize=(6,5))
+    plot_heatmap(R=R, matrix=rel_diff, vmax=np.ceil(np.max(rel_diff)*2)/2, labelpad=-90, labelsize=15, cmap=cm, 
+        title='Relative difference between \n empirical and theoretical cost', 
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"cost_diff.pdf"))
 
-    # plt.imshow(abs_diff, cmap=cm)
-    sns.heatmap(rel_diff, cmap=cm, robust=True, square=True,
-                linewidths=0.1, linecolor='white', vmin=0, vmax=np.ceil(np.max(rel_diff)*2)/2,
-                annot=rel_diff, annot_kws={'fontsize': 11}, fmt='.2f',mask=mask,
-                cbar_kws={'label': 'relative difference between \n empirical and theoretical costs'})
-    ax.set_xlabel("Replicate", fontsize=15)
-    ax.set_ylabel("Replicate", fontsize=15)
-    cbar = ax.collections[0].colorbar
-    cbar.set_label('Relative difference between \n empirical and theoretical cost', labelpad=-75, fontsize=15)
-    cbar.ax.tick_params(labelsize=13)
-
-    # plt.clim(0,500)
-    ax.set_xticks([i+0.5 for i in range(R)])
-    ax.set_xticklabels(range(1,R+1), fontsize=13)
-    ax.set_yticks([i+0.5 for i in range(R)])
-    ax.set_yticklabels(range(1,R+1), fontsize=13)
-
-    pass
-
-    fig.savefig(os.path.join(output_path,"cost_diff.pdf"), bbox_inches='tight', format='pdf', dpi=200, transparent=True) #svg
     
-    
-    # all possible permutation w.r.t. the first replicate
+    # plot the cost of all possible permutation w.r.t. the first replicate (Fig. 5 and 6 Panel E)
     permutations_of_index = np.array(list(itertools.permutations(range(0,K))))
 
     num_misaligned = []
@@ -242,25 +200,33 @@ def main(args):
     cmap_misnum = plt.get_cmap("RdYlGn_r") #YlOrRd
     colors_misnum = cmap_misnum(np.linspace(0.3, 1, K+1))
     tick_colors = colors_misnum[np.array([num_misaligned[i] for i in sorted_idx])]
+    if K==4:
+        markers = {0:"D", 2:"o", 3:"s", 4:"^"}
+    else:
+        markers = {i:"o" for i in range(K+1)}
+    tick_markers = [markers[num_misaligned[i]] for i in sorted_idx]
     costs = the_C_wrt1_total_list
 
     # plot 
-    fig, ax = plt.subplots(figsize=(9,5))    
+    fig, ax = plt.subplots(figsize=(10,6))    
 
-    ax.plot(range(len(costs)),costs,c="gray",alpha=0.5)#"o-",mec='k', mew=1, mfc="None",ms=6)
-    ax.scatter(range(len(costs)),costs,c=tick_colors, s=50, edgecolors="k", linewidths=1, zorder=3) #"None"
+    ax.plot(range(len(costs)),costs,c="gray",alpha=0.5) 
+    for i, c in enumerate(costs):
+        ax.scatter(i,c,color=tick_colors[i],s=100,edgecolors="k", linewidths=1, zorder=3, marker=tick_markers[i],clip_on=False)
 
     for i, v in enumerate(costs):
-        ax.text(i - .25, v+0.05, "{:0.3f}".format(v), color="k",rotation=70,size=14) #va='center', fontweight='bold')
-    ax.set_xlabel("Permutation",size=16)
-    ax.set_ylabel("Cost",size=16)
+        ax.text(i - .25, v+0.05, "{:0.3f}".format(v), color="k",rotation=70,size=17) 
+            
+    ax.set_xlabel("Permutation",size=22)
+    ax.set_ylabel("Cost",size=22)
     ax.set_xticks(range(len(costs)))
-    ax.set_xticklabels([str(permutations_of_index[i]) for i in sorted_idx], rotation=60, fontsize=14)
+    ax.set_xticklabels(["("+",".join([str(s) for s in permutations_of_index[i]])+")" for i in sorted_idx], 
+                       rotation=90, fontsize=18)
 
     for ticklabel, tickcolor in zip(plt.gca().get_xticklabels(),tick_colors):
         ticklabel.set_color(tickcolor)
     ax.set_ylim([0,1])
-    ax.tick_params(axis='y', labelsize=14)
+    ax.tick_params(axis='y', labelsize=18)
 
     real_idx = []
     real_cost = []
@@ -268,30 +234,40 @@ def main(args):
         if i in real_perm_idx_sorted:
             real_cost.append(np.mean(pw_cost_emp[0][np.where(real_perm_idx_sorted==i)[0]]))
             real_idx.append(i)
-    ax.bar(real_idx,real_cost, color='tab:blue', alpha=0.5, width=0.3) #,c=tick_colors, s=50, edgecolors="k", linewidths=1, zorder=3)
-
-    props = dict(boxstyle='round', edgecolor='None', facecolor='white', alpha=0.7)
-    for i in range(1,len(real_idx)):
-        ax.text(real_idx[i]-0.5, real_cost[i]/2+0.05, "{:0.3f}".format(real_cost[i]), color="k",
-                rotation=70, size=14, bbox=props, verticalalignment='top')
+    ax.bar(real_idx,real_cost, color='tab:blue', alpha=0.5, width=0.4) #,c=tick_colors, s=50, edgecolors="k", linewidths=1, zorder=3)
+    props = dict(boxstyle='round,pad=0.1', edgecolor='None', facecolor='white', alpha=0.7)
+    if cost_vs_perm_label_above_bar: # whether to label the empirical values above or in the middle of the bars
+        for i in range(1,len(real_idx)):
+            ax.text(real_idx[i]-0.5, real_cost[i]+0.4, "{:0.3f}".format(real_cost[i]), color="k",
+                    rotation=70, size=18, bbox=props, verticalalignment='top')
+            ax.axvline(real_idx[i], ymin=real_cost[i], ymax=real_cost[i]+0.35, color='tab:blue', 
+                       linestyle=(0, (2, 3)), linewidth=2)
+    else:
+        for i in range(1,len(real_idx)):
+            ax.text(real_idx[i]-0.5, real_cost[i]/2+0.05, "{:0.3f}".format(real_cost[i]), color="k",
+                    rotation=70, size=18, bbox=props, verticalalignment='top')
 
     # number of misaligned clusters
     patches = []
     for i,c in enumerate(colors_misnum):
         if i!=1:
-            circ = mlines.Line2D([], [], color=c, marker='o', linestyle='None',mec='k', mew=1,
+            circ = mlines.Line2D([], [], color=c, marker=markers[i], linestyle='None',mec='k', mew=1,
                               markersize=10, label="{}".format(i))
             patches.append(circ)
 
     patches2 = []
-    patches2.append(mpatches.Patch(color='tab:blue', alpha=0.5, label='mean value of real replicate(s)'))
+    patches2.append(mpatches.Patch(color='tab:blue', alpha=0.5, label='mean value of \nreal replicate(s)'))
 
-    leg1 = plt.legend(handles=patches,title="number of misaligned clusters", 
-               fontsize=14, fancybox=True,ncol=4,loc=2,bbox_to_anchor=(0,0,0.8,1))#1)loc=(0.6, 0.7)
-    leg2 = plt.legend(handles=patches2, bbox_to_anchor=(0,0,0.8,0.82),
-               fontsize=14, fancybox=True,ncol=4,loc=2)
+    leg1 = plt.legend(handles=patches,title="number of \nmisaligned clusters",
+                     fontsize=18, fancybox=True,ncol=len(patches), loc=2,
+                     labelspacing = 0.3, borderpad=0.3,columnspacing = 0.5,handletextpad=0,
+                     title_fontsize=18,bbox_to_anchor=(0,0,0.95,1))#1)loc=(0.6, 0.7)
     plt.gca().add_artist(leg1)
-    leg1.get_title().set_fontsize('14')
+    leg1._legend_box.align = "center"
+    leg1.get_title().set_horizontalalignment('center')
+
+    leg2 = plt.legend(handles=patches2, bbox_to_anchor=(0,0,0.95,0.77),
+               fontsize=18, fancybox=True,ncol=4,loc=2)
     pass
 
     fig.savefig(os.path.join(output_path,"cost_vs_perm_rep1.pdf"), bbox_inches='tight', format='pdf', dpi=300, transparent=True) 
@@ -299,10 +275,11 @@ def main(args):
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_file', type=str, required=True, help="path to membership replicates file")
-    parser.add_argument('--R', type=int, required=True, help="number of replicates")
-    parser.add_argument('--perm_file', type=str, required=True, help="path to permutation file")
-    parser.add_argument('--output_path', type=str, required=False, help="path to save outputs")
+    parser.add_argument('--param_file', type=str, required=True, help="path to the parameter file")
+    # parser.add_argument('--input_file', type=str, required=True, help="path to membership replicates file")
+    # parser.add_argument('--R', type=int, required=True, help="number of replicates")
+    # parser.add_argument('--perm_file', type=str, required=True, help="path to permutation file")
+    # parser.add_argument('--output_path', type=str, required=False, help="path to save outputs")
     
     args = parser.parse_args()
     main(args)

@@ -1,0 +1,1 @@
+python -m AlignmentCost.main --param_file scripts/all_param.txt 
