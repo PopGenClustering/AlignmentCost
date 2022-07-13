@@ -26,24 +26,21 @@ The **output** folder will be automatically generated if run the provided exampl
 * Install [Python 3](https://www.python.org/downloads/).
 * Open a terminal shell. E.g., [Git Bash](https://git-scm.com/downloads) shell on Windows, Bash Shell on Linux, or Mac Terminal on Mac.
 * Install the package:
-  * To install the package directly from GitHub:
 
-    ```
-    pip install git+https://github.com/xr-cc/AlignmentCost
-    ```
-
-    Use ```pip show AlignmentCost``` to find out the location of the installed pakcage. 
-
-    Navigate (using command ```ls```) to that directory.
-
-  * To download the package from GitHub then install:
+  * Download and install the package from GitHub:
  
-    Download this repository to local (by clicking the button on the top right corner)
+    Download this repository to local (click on the green Code button on the top right corner, then download the repository as a ZIP file.)
 
     Navigate to the directory in the terminal (using command ```ls```). You should now be under the main ```AlignmentCost/``` directory which contains this [README.md](README.md) file.
 
     ```
     pip install -e .
+    ```
+    
+  * Alternatively, you may install the package (without data and example scripts) directly from GitHub:
+
+    ```
+    pip install git+https://github.com/xr-cc/AlignmentCost
     ```
 
 ### How to run the examples
