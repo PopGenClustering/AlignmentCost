@@ -4,12 +4,12 @@ This folder contains all datasets used as examples and the code (in a Python pac
 
 ## Contents
 
-The **data** folder contains four data files taken from the Supplementary materials of Fortier et al. 2020 that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in Fortier et al. 2020.  
+The **data** folder contains four data files taken from the Supplementary materials of *Fortier et al. 2020* that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in *Fortier et al. 2020*.  
  * *all_indfile.txt* and *codis_indfile.txt* are adapted from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of Fortier et al. 2020 Supplementary. 
  * *all_clumpp_results.txt* and *codis_clumpp_results.txt* are takend from *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files.
 
 The **AlignmentCost** folder contains the code files: *fund_utils.py* and *main.py*.
- * *fund_utils.py* contains several helper functions for data analysis and visualization, including 
+ * *func_utils.py* contains several helper functions for data analysis and visualization, including 
    * ```repdist(a,b)``` which implements Eq. 10 in the article,
    * ```repdist0(a)``` which implements Eq. 11,
    * and ```alignment_cost(a,b)``` which implements Eq. 12.
