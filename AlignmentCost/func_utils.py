@@ -9,14 +9,6 @@ from scipy import special
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# import pandas as pd
-# import os
-# import sys
-# 
-# import time
-# from itertools import product,combinations_with_replacement
-# from collections import defaultdict
-
 
 # Inverse of the digamma function 
 def digamma_inv(y, n_iter=5):
@@ -62,7 +54,8 @@ def fixed_point(Q, a0, n_iter = 10):
         a = a_next
     return a
 
-# Alignment costs
+# Alignment cost functions
+# Eq.10
 def repdist(a,b):
     a0 = np.sum(a)
     b0 = np.sum(b)
@@ -72,21 +65,21 @@ def repdist(a,b):
     temp2 = np.sum(np.multiply(b_sub+1,b_sub))+np.sum(np.tril(np.outer(b,b),-1)[:-1,:])
     temp3 = np.sum(np.multiply(a_sub,b_sub))+np.sum(a_sub)*np.sum(b_sub)
     return 2*(temp1/((a0+1)*a0)+temp2/((b0+1)*b0)-temp3/(a0*b0))
-
+# Eq.11
 def repdist0(a):
     a0 = np.sum(a)
     return 4*np.sum(np.tril(np.outer(a,a),-1))/((a0+1)*(a0**2))
-    
+# Eq.12
 def alignment_cost(a,b):
     a0 = np.sum(a)
     return 0.5*np.sum(np.multiply(a,a-b))*2/a0**2
 
 
 # plotting functions
+
 def plot_heatmap(R, matrix, vmax, labelpad, labelsize, cmap, title, xlab, ylab, save_path):
     mask = np.zeros_like(matrix, dtype=bool)
     mask[np.triu_indices_from(mask,k=1)] = True
-
     cm = cmap
 
     fig, ax = plt.subplots(1,1, figsize=(7,6))
@@ -107,7 +100,6 @@ def plot_heatmap(R, matrix, vmax, labelpad, labelsize, cmap, title, xlab, ylab, 
     ax.set_yticklabels(range(1,R+1), fontsize=15)
 
     pass
-
     fig.savefig(save_path, bbox_inches='tight', format='pdf', dpi=200, transparent=True) #svg
 
 def plot_bar(R, N, K, popIDs, df_ind, colors, save_path):

@@ -18,24 +18,17 @@ from AlignmentCost.func_utils import *
 
 def main(args):
 
-    # param_file = "AlignmentCost/scripts/all_param.txt"
     param_file = args.param_file
 
     with open(param_file) as f:
         param_lines = f.read().splitlines() 
 
-    # params = dict()
     for line in param_lines:
         if line:
             name = line.split(": ")[0]
             val = line.split(": ")[1]
             print(name,val)
             exec("{} = {}".format(name,val), globals())
-
-    print(input_file)
-    # input_file = args.input_file
-    # R = args.R # number of replicates
-    # perm_file = args.perm_file
 
     df_ind = pd.read_csv(input_file, delimiter=r"\s+", header = None)
     df_ind = df_ind.rename(columns={1:"indID",3:"popID"})
@@ -45,11 +38,7 @@ def main(args):
     popIDs = df_ind["popID"].unique()
     if N*R!=len(df_ind):
         sys.exit('ERROR: total number of rows in the file does not equal N*R. \nPlease check if all replicates contain memberships of the same individuals.')
-    
-    # if args.output_path:
-    #     output_path = args.output_path 
-    # else:
-    #     output_path = "output"
+
     
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -234,9 +223,9 @@ def main(args):
         if i in real_perm_idx_sorted:
             real_cost.append(np.mean(pw_cost_emp[0][np.where(real_perm_idx_sorted==i)[0]]))
             real_idx.append(i)
-    ax.bar(real_idx,real_cost, color='tab:blue', alpha=0.5, width=0.4) #,c=tick_colors, s=50, edgecolors="k", linewidths=1, zorder=3)
+    ax.bar(real_idx,real_cost, color='tab:blue', alpha=0.5, width=0.4) 
     props = dict(boxstyle='round,pad=0.1', edgecolor='None', facecolor='white', alpha=0.7)
-    if cost_vs_perm_label_above_bar: # whether to label the empirical values above or in the middle of the bars
+    if cost_vs_perm_label_above_bar: 
         for i in range(1,len(real_idx)):
             ax.text(real_idx[i]-0.5, real_cost[i]+0.4, "{:0.3f}".format(real_cost[i]), color="k",
                     rotation=70, size=18, bbox=props, verticalalignment='top')
@@ -276,10 +265,6 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--param_file', type=str, required=True, help="path to the parameter file")
-    # parser.add_argument('--input_file', type=str, required=True, help="path to membership replicates file")
-    # parser.add_argument('--R', type=int, required=True, help="number of replicates")
-    # parser.add_argument('--perm_file', type=str, required=True, help="path to permutation file")
-    # parser.add_argument('--output_path', type=str, required=False, help="path to save outputs")
-    
+
     args = parser.parse_args()
     main(args)
