@@ -3,6 +3,15 @@ Alignment Cost
 #### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
 It contains all datasets used as examples and the code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article. 
 
+[Last edited by Xiran Liu, 7/22/2022.]
+
+------
+
+This README file describes the following:
+  * [Contents of the directory](/guides/content/editing-an-existing-page#modifying-front-matter)
+  * 
+
+
 ## Contents
 
 * [AlignmentCost](AlignmentCost): the folder containing the code files.
@@ -161,6 +170,7 @@ The above Python commands are provided in [compute_alignment_cost_from_Q_demo.py
 python demo/compute_alignment_cost_from_Q_demo.py
 ```
 
+------
 > You may run the following parts to perform data analysis using the alignment cost.
 
 ### How to run the data analysis in the article 
