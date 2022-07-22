@@ -209,5 +209,3 @@ You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article.
   6. ```cost_vs_perm_label_above_bar``` is either ```True``` or ```False```, depending on where you want the labels of the empirical costs to be in Panel E.
   * Note that the paths can either be relative or absolute.
   
-## Citation:
->
