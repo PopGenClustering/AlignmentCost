@@ -1,31 +1,42 @@
-# Alignment Cost
-
-### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
+Alignment Cost
+------
+#### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
 It contains all datasets used as examples and the code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article. 
 
 ## Contents
 
-The **data** folder contains four data files taken from the Supplementary materials of *Fortier et al. 2020* that we used for the empirical anlaysis. We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in *Fortier et al. 2020*.  
- * *all_indfile.txt* and *codis_indfile.txt* are adapted from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of Fortier et al. 2020 Supplementary. 
- * *all_clumpp_results.txt* and *codis_clumpp_results.txt* are takend from *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files.
+* [AlignmentCost](AlignmentCost): the folder containing the code files.
+* [demo](demo): the folder containing the demonstration of how to calculate alignment cost given membership matrix.
+* [data](data): the folder containing the data analysis scripts used for generating Fig. 5 and 6 in the article.
 
+#### [AlignmentCost](AlignmentCost)
 The **AlignmentCost** folder contains the code files: *fund_utils.py* and *main.py*.
  * *func_utils.py* contains several helper functions for data analysis and visualization, including 
    * ```repdist(a,b)``` which implements Eq. 10 in the article,
    * ```repdist0(a)``` which implements Eq. 11,
    * and ```alignment_cost(a,b)``` which implements Eq. 12.
- * *main.py* contains the major code we use to analyze the datasets and produce the plots in Fig. 5 and 6. It also serves as the main body of the Python package.
+ * *main.py* contains the code we use to analyze the datasets and produce the plots in Fig. 5 and 6. It also serves as the main body of the Python package.
 
-The **scripts** folder contains 
- * the parameter files used for the examples (more details in the next section)
- * a sample bash script with the command line argument 
- * *compute_cost_demo.py* which demonstrates how to use the functions in this package to estimate Dirichlet parameters and compute the alignment cost given membership coefficient matrix.
+#### [demo](demo)
+The **demo** folder contains the file *compute_alignment_cost_from_Q_demo.py*, which shows a toy example on calculating the alignment cost from a membership coefficient matrix. 
 
-The **output** folder will be automatically generated if run the provided examples. Figures will be output to this folder.
+#### [data](data)
+The **data** folder contains the input data files (in [data/input/](data/input)) and the scripts (in [data/scripts/](data/scripts)) used to generate the output figures (in [data/output/](data/output)).
 
-## Usage
+1. **Input data files**: the **data/input** folder contains four data files taken from the Supplementary materials of *Fortier et al. 2020* that we used for the empirical anlaysis. 
+  
+    We modified the ordering of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in *Fortier et al. 2020*. There is no change to the data provided in *Fortier et al. 2020* besides the ordering.
 
-### How to install
+     * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of *Fortier et al. 2020* Supplementary, modified by reordering. 
+     * *all_loci_analysis_perm_file.txt* and *codis_loci_analysis_perm_file.txt* are taken from the middle parts of *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files that contain the permutation information of the aligned replicates.
+
+2. **Script files**: The **scripts** folder contains 
+   * the parameter files used for the examples (more details in the later section)
+   * a sample bash script with the command line argument 
+
+3. **Output files**: The **output** folder will be automatically generated if run the provided examples. Figures will be output to this folder.
+
+## How to Install
 
 * Install [Python 3](https://www.python.org/downloads/).
 * Open a terminal shell. E.g., [Git Bash](https://git-scm.com/downloads) shell on Windows, Bash Shell on Linux, or Mac Terminal on Mac.
@@ -33,7 +44,7 @@ The **output** folder will be automatically generated if run the provided exampl
 
   * Download and install the package from GitHub:
  
-    Download this repository to local (click on the green Code button on the top right corner, then download the repository as a ZIP file.)
+    Download this repository to local (*click on the green Code button on the top right corner, then download the repository as a ZIP file.*)
 
     Navigate to the directory in the terminal (using command ```ls```). You should now be under the main ```AlignmentCost-main/``` directory which contains this [README.md](README.md) file.
 
@@ -47,17 +58,111 @@ The **output** folder will be automatically generated if run the provided exampl
     pip install git+https://github.com/xr-cc/AlignmentCost
     ```
 
-### How to calculate the alignment cost (Eq. 12)
-The file [*scripts/compute_cost_demo.py*](scripts/compute_cost_demo.py) contains a toy example on calculating the alignment cost from a membership coefficient matrix. 
+## How to Use
 
-You may run the file from any Python IDE, or simply run the command below:
+> You may run the following toy example to check if the package is installed successfully.
+
+### How to calculate the alignment cost from a membership coefficient matrix
+ 
+  * Launch Python. 
+  
+    On Windows Git Bash, run
+    ```
+    python -i
+    ```
+    with the key "-i" for interactive prompt. You cursor should now appear on a line starting with ``>>>``.
+  
+  * Import packages.
+  
+    ```python
+    import numpy as np
+    from AlignmentCost.func_utils import *
+    ```
+    
+  * Load the membership matrix. 
+  
+    Here we use a toy example of an 8x4 membership matrix. Each row stands for a individual and each column stands for a cluster. The entires of the matrix correspond to the membership coefficients of individuals for each of the clusters.
+    ```python
+    Q = np.array([
+    [0.15,0.25,0.59,0.01],
+    [0.16,0.22,0.55,0.07],
+    [0.20,0.18,0.60,0.02],
+    [0.16,0.22,0.61,0.01],
+    [0.18,0.19,0.56,0.07],
+    [0.22,0.25,0.50,0.03],
+    [0.20,0.20,0.56,0.04],
+    [0.15,0.22,0.57,0.06]])
+    ```
+  
+  * Use fixed point algorithm to perform MLE (maximum likelihood estimation) of the Dirichlet parameters.
+    ```python
+    a0 = initial_guess(Q)
+    a = fixed_point(Q, a0)
+    ```
+    
+  * Print the estimated parameters.
+    ```python
+    print("a=({})".format(",".join(["{:.3f}".format(i) for i in a])))
+    ```
+    You should get the following line:
+    ```
+    a=(41.716,50.887,133.328,7.592)
+    ```
+    
+  * Verify the estimation by comparing the mean and variance of the empirical data and the estimated distribution.
+    ```python
+    emp_mean = np.mean(Q,axis=0)
+    emp_var = np.var(Q,axis=0)
+    print("empirical mean: {}".format(" ".join(["{:.3f}".format(i) for i in emp_mean])))
+    print("empirical variance: {}".format(" ".join(["{:.3f}".format(i) for i in emp_var])))
+    
+    est_mean, est_var = dir_mean_var(a)
+    print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_mean])))
+    print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_var])))
+    ```
+     You should get the following lines:
+    ```
+    empirical mean: 0.177 0.216 0.568 0.039
+    empirical variance: 0.001 0.001 0.001 0.001
+    Dirichlet mean: 0.179 0.218 0.571 0.033
+    Dirichlet mean: 0.001 0.001 0.001 0.000
+    ```
+    
+  * Compute alignment cost for specific permutation pattern. 
+  
+    For instance, without any permutation, run
+    ```python
+    permutation = np.array([0,1,2,3])
+    ```
+    Note that Python uses zero-based indexing.
+    
+    Then run
+    ```python
+    b = a[permutation]
+    cost = alignment_cost(a,b)
+    print("permutation: {}, cost: {:.3f}".format(" ".join([str(i+1) for i in permutation]),cost))
+    ```
+    You should get the following line:
+    ```
+    permutation: 1 2 3 4, cost: 0.000
+    ```
+    For this toy example Q matrix, if you choose `permutation = np.array([0,1,3,2])`, then you will get `permutation: 1 2 4 3, cost: 0.290`.
+    
+    If you choose `permutation = np.array([1,0,2,3])`, then you will get `permutation: 2 1 3 4, cost: 0.002`.
+
+  * Quit Python.
+    ```
+    exit()
+    ```
+
+The above Python commands are provided in [compute_alignment_cost_from_Q_demo.py](compute_alignment_cost_from_Q_demo.py). You may run this file from any Python IDE, or simply run the command below:
 
 ```
-python scripts/compute_cost_demo.py
+python demo/compute_alignment_cost_from_Q_demo.py
 ```
 
 
-### How to run the examples
+### How to run the data analysis in the article 
 You may reproduce the analysis on the datasets described in the article.
 
   * For *STRUCTURE* replicates based on the full set of 791 loci (Fig. 5):
