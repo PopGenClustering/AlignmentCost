@@ -1,6 +1,7 @@
 # Alignment Cost
 
-The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. It contains all datasets used as examples and the code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article. 
+### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
+It contains all datasets used as examples and the code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article. 
 
 ## Contents
 
