@@ -15,7 +15,10 @@ The **AlignmentCost** folder contains the code files: *fund_utils.py* and *main.
    * and ```alignment_cost(a,b)``` which implements Eq. 12.
  * *main.py* contains the major code we use to analyze the datasets and produce the plots in Fig. 5 and 6. It also serves as the main body of the Python package.
 
-The **scripts** folder contains the parameter files used for the examples (more details in the next section), as well as a sample bash script with the command line argument.
+The **scripts** folder contains 
+ * the parameter files used for the examples (more details in the next section)
+ * a sample bash script with the command line argument 
+ * *compute_cost_demo.py* which demonstrates how to use the functions in this package to estimate Dirichlet parameters and compute the alignment cost given membership coefficient matrix.
 
 The **output** folder will be automatically generated if run the provided examples. Figures will be output to this folder.
 
@@ -42,6 +45,16 @@ The **output** folder will be automatically generated if run the provided exampl
     ```
     pip install git+https://github.com/xr-cc/AlignmentCost
     ```
+
+### How to calculate the alignment cost (Eq. 12)
+The file [*scripts/compute_cost_demo.py*](scripts/compute_cost_demo.py) contains a toy example on calculating the alignment cost from a membership coefficient matrix. 
+
+You may run the file from any Python IDE, or simply run the command below:
+
+```
+python scripts/compute_cost_demo.py
+```
+
 
 ### How to run the examples
 You may reproduce the analysis on the datasets described in the article.
