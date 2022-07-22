@@ -54,6 +54,13 @@ def fixed_point(Q, a0, n_iter = 10):
         a = a_next
     return a
 
+# Helper function to compute the mean and variance of Dirichlet distribution
+def dir_mean_var(a):
+    a0 = np.sum(a)
+    avg = a/a0
+    var = np.multiply(a,a0-a)/(a0**2*(a0+1))
+    return avg, var
+
 # Alignment cost functions
 # Eq.10
 def repdist(a,b):
