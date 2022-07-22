@@ -35,7 +35,7 @@ The **output** folder will be automatically generated if run the provided exampl
  
     Download this repository to local (click on the green Code button on the top right corner, then download the repository as a ZIP file.)
 
-    Navigate to the directory in the terminal (using command ```ls```). You should now be under the main ```AlignmentCost/``` directory which contains this [README.md](README.md) file.
+    Navigate to the directory in the terminal (using command ```ls```). You should now be under the main ```AlignmentCost-main/``` directory which contains this [README.md](README.md) file.
 
     ```
     pip install -e .

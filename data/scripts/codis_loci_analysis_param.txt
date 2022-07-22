@@ -1,0 +1,6 @@
+input_file: "data/input/codis_loci_analysis_input_file.txt"
+perm_file: "data/input/codis_loci_analysis_perm_file.txt"
+output_path: "data/output/codis_loci_analysis"
+R: 10
+vmax: 0.12
+cost_vs_perm_label_above_bar: True

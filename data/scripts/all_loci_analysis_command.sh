@@ -1,0 +1,1 @@
+python -m AlignmentCost.main --param_file data/scripts/all_loci_analysis_param.txt 

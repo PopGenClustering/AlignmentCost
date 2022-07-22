@@ -1,0 +1,6 @@
+input_file: "data/input/all_loci_analysis_input_file.txt"
+perm_file: "data/input/all_loci_analysis_perm_file.txt"
+output_path: "data/output/all_loci_analysis"
+R: 10
+vmax: 1.0
+cost_vs_perm_label_above_bar: False

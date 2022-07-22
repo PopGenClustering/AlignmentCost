@@ -1,6 +1,0 @@
-input_file: "data/codis_indfile.txt"
-perm_file: "data/codis_clumpp_results.txt"
-output_path: "output/codis"
-R: 10
-vmax: 0.12
-cost_vs_perm_label_above_bar: True
