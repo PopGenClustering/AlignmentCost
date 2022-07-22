@@ -8,8 +8,11 @@ It contains all datasets used as examples and the code (in a Python package ```A
 ------
 
 This README file describes the following:
-  * [Contents of the directory](/guides/content/editing-an-existing-page#modifying-front-matter)
-  * 
+  * [Contents of the directory](#contents)
+  * [Installation instructions](#how-to-install) 
+  * [Toy example on calculating the alignment cost from a membership matrix](#how-to-calculate-the-alignment-cost-from-a-membership-coefficient-matrix)
+  * [How to reproduce the data analysis in the article](#how-to-run-the-data-analysis-in-the-article)
+  * [How to analyze your own data](#how-to-run-the-analysis-on-your-own-data)
 
 
 ## Contents
