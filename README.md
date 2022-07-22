@@ -40,7 +40,7 @@ The **output** folder will be automatically generated if run the provided exampl
     pip install -e .
     ```
     
-  * Alternatively, you may install the package (without data and example scripts) directly from GitHub:
+  * Alternatively, you may install the package (without data and example scripts) directly from GitHub [**not recommended**]:
 
     ```
     pip install git+https://github.com/xr-cc/AlignmentCost
