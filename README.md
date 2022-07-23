@@ -200,7 +200,7 @@ You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article.
   ```
   python -m AlignmentCost.main --param_file PATH_TO_YOUR_OWN_PARAMETER_FILE
   ```
-  PATH_TO_YOUR_OWN_PARAMETER_FILE should contain information about your own data, where 
+  ```PATH_TO_YOUR_OWN_PARAMETER_FILE``` should contain information about your own data, where 
   1. ```input_file``` points to a **space-delimited** input file in the same format as the exemplary file  [```data/input/all_loci_analysis_input_file.txt```](data/input/all_loci_analysis_input_file.txt). It should contain 5+K columns, where K is the number of clusters in the replicates. The 2nd column contains the individual identifier number and the 4th column contains the population identifier number. It follows the *CLUMPP* individual input file format. The path must be wrapped by quotes, as in the examplary parameter file.
   2. ```perm_file``` points to a **space-delimited** file containing the correct permutations (alignment) with respect to the first replicate. The file should be in the same format as the exemplary file  [```data/input/all_loci_analysis_perm_file.txt```](data/input/all_loci_analysis_perm_file.txt). Each row corresponds to the permutation of one replicate, and each column corresponds to a cluster. The first row should always be ```1 2 ... K```. This can be extracted from the output files of *CLUMPP*. The path must be wrapped by quotes, as in the examplary parameter file. 
   3. ```output_path``` points to the directory where you want to save your output figures. The path must be wrapped by quotes, as in the examplary file.
