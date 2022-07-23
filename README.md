@@ -56,9 +56,11 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
   * Download and install the package from GitHub:
  
-    Download this repository to local (*click on the green Code button on the top right corner, then download the repository as a ZIP file.*)
+    Download this repository to local (*click on the green **Code** button on the top right corner, then download the repository as a ZIP file.*)
 
-    Navigate to the directory in the terminal (using command ```ls```). You should now be under the main ```AlignmentCost-main/``` directory which contains this [README.md](README.md) file.
+    Unzip the file. 
+    
+    Navigate to the directory (using command ```cd```). You should now be under the main ```AlignmentCost-main/``` directory which contains this [README.md](README.md) file.
 
     ```
     pip install -e .
