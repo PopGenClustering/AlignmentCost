@@ -50,7 +50,7 @@ def main(args):
     else:
         cmap = matplotlib.cm.get_cmap('Spectral')
         colors = [cmap(i)[:3] for i in np.linspace(0,1,K)]
-    plot_bar(R, N, K, popIDs, df_ind, colors=colors, save_path=os.path.join(output_path,"all_reps.pdf"))
+    plot_bar(R, N, K, popIDs, df_ind, colors=colors, save_path=os.path.join(output_path,"all_replicates.pdf"))
 
     # load ground-truth permutation
     perm_results = np.loadtxt(perm_file).astype(int).tolist()
@@ -143,12 +143,12 @@ def main(args):
     # plot pairwise theoretical cost (Fig. 5 and 6 Panel B)
     cm = plt.get_cmap("YlOrBr")
     plot_heatmap(R=R, matrix=pw_cost_the, vmax=vmax, labelpad=-80, labelsize=20, cmap=cm, title='Theoretical cost', 
-        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"the_cost.pdf"))
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"theoretical_cost.pdf"))
 
     # plot pairwise empirical cost (Fig. 5 and 6 Panel C)
     cm = plt.get_cmap("YlOrBr")
     plot_heatmap(R=R, matrix=pw_cost_emp, vmax=vmax, labelpad=-80, labelsize=20, cmap=cm, title='Empirical cost', 
-        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"emp_cost.pdf"))
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"empirical_cost.pdf"))
 
     # plot different between empirical and theoretical costs  (Fig. 5 and 6 Panel D)
     cm = plt.get_cmap("GnBu")
@@ -157,7 +157,7 @@ def main(args):
 
     plot_heatmap(R=R, matrix=rel_diff, vmax=np.ceil(np.max(rel_diff)*2)/2, labelpad=-90, labelsize=15, cmap=cm, 
         title='Relative difference between \n empirical and theoretical cost', 
-        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"cost_diff.pdf"))
+        xlab="Replicate", ylab="Replicate", save_path=os.path.join(output_path,"cost_difference.pdf"))
 
     
     # plot the cost of all possible permutation w.r.t. the first replicate (Fig. 5 and 6 Panel E)

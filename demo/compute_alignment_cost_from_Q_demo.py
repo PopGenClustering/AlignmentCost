@@ -9,7 +9,8 @@ from AlignmentCost.func_utils import *
 # load membership matrix
 # row: individual, column: membership for each cluster
 # The example matrix contains memberships of 8 individuals in 4 clusters.
-Q = np.array([[0.15,0.25,0.59,0.01],
+Q = np.array([
+    [0.15,0.25,0.59,0.01],
     [0.16,0.22,0.55,0.07],
     [0.20,0.18,0.60,0.02],
     [0.16,0.22,0.61,0.01],
