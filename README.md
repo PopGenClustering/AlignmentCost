@@ -50,10 +50,23 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
 ## How to Install
 
-**NOTE: If you are on Linux system, use ```python3``` instead of ```python``` and ```pip3``` instead of ```pip``` for all the following commands.**
-
 * Install [Python 3](https://www.python.org/downloads/).
 * Open a terminal shell. E.g., [Git Bash](https://git-scm.com/downloads) shell on Windows, Bash Shell on Linux, or Mac Terminal on Mac.
+
+**NOTE 1. If you have both versions of Python, you may need to use ```python3``` instead of ```python``` and ```pip3``` instead of ```pip``` for all the following commands.** You can check this by running
+  ```
+  python --version
+  ```
+  ```
+  python3 --version
+  ```
+  or set the alias by
+  ```
+  alias python=python3
+  ```
+
+**NOTE 2. If you are using Linux system, please install ```python3-matplotlib``` after installing Python 3 before installing this package.**
+
 * Install the package:
 
   * Download and install the package from GitHub:
