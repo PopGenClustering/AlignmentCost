@@ -65,7 +65,10 @@ The **data** folder contains the input data files (in [data/input/](data/input))
   alias python=python3
   ```
 
-**NOTE 2. If you are using Linux system, please install ```python3-matplotlib``` after installing Python 3 before installing this package.**
+**NOTE 2. If you are using Linux system, please install ```python3-matplotlib``` after installing Python 3 before installing this package.** For example, if you are on Red Hat, run
+  ```
+  sudo yum install python3-matplotlib
+  ```
 
 * Install the package:
 
