@@ -50,6 +50,8 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
 ## How to Install
 
+**NOTE: If you are on Linux system, use ```python3``` instead of ```python``` and ```pip3``` instead of ```pip``` for all the following commands.**
+
 * Install [Python 3](https://www.python.org/downloads/).
 * Open a terminal shell. E.g., [Git Bash](https://git-scm.com/downloads) shell on Windows, Bash Shell on Linux, or Mac Terminal on Mac.
 * Install the package:
