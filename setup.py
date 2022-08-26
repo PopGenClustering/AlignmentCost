@@ -10,7 +10,7 @@ setup(
     author='Xiran Liu et al',
     zip_safe=False,
     packages=find_packages(),
-    install_requires=["numpy","pandas","scipy","python3-matplotlib","seaborn","argparse"] if sys.platform.startswith("lin") else ["numpy","pandas","scipy","matplotlib","seaborn","argparse"],
+    install_requires=["numpy","pandas","scipy","matplotlib","seaborn","argparse"],
     tests_require=[],
     include_package_data=True,
     long_description=long_description,
