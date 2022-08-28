@@ -36,7 +36,7 @@ print("empirical variance: {}".format(" ".join(["{:.3f}".format(i) for i in emp_
 # compute mean and variance of the estimated Dirichlet distribution
 est_mean, est_var = dir_mean_var(a)
 print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_mean])))
-print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_var])))
+print("Dirichlet variance: {}".format(" ".join(["{:.3f}".format(i) for i in est_var])))
 
 
 # compute alignment cost for permutation pattern
