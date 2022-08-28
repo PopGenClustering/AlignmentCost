@@ -53,32 +53,38 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 * Install [Python 3](https://www.python.org/downloads/).
 * Open a terminal shell. E.g., [Git Bash](https://git-scm.com/downloads) shell on Windows, Bash Shell on Linux, or Mac Terminal on Mac.
 
-**NOTE 1. If you have both versions of Python, you may need to use ```python3``` instead of ```python``` and ```pip3``` instead of ```pip``` for all the following commands.** You can check this by running
+**NOTE 1. Depending on your operating system, you may need to use the command ```python3``` instead of ```python``` and ```pip3``` instead of ```pip``` for all the following commands.** You can check this by running
   ```
-  python --version
+  which python
   ```
+  and
   ```
-  python3 --version
+  which python3
   ```
-  or set the alias by
+  These commands will identify the location of executable Python on your system. You should use the one that returns you the path, not the one that is not found.
+  
+  Alternatively, if your system supports the command ```python3``` but you prefer using ```python```, you may choose to set the alias by
   ```
   alias python=python3
   ```
+  then you can go ahead and use the ```python``` command. Same for the command ```pip```.
 
-**NOTE 2. If you are using Linux system, please install ```python3-matplotlib``` after installing Python 3 before installing this package.** For example, if you are on Red Hat, run
+**NOTE 2. If you are using a Linux system, please install ```python3-matplotlib``` after installing Python 3 before installing the AlignmentCost package.** For example, if you are using Linux Red Hat, run
   ```
   sudo yum install python3-matplotlib
   ```
 
 * Install the package:
 
-  * Download and install the package from GitHub:
+  * Download and install the AlignmentCost package from GitHub:
  
-    Download this repository to local (*click on the green **Code** button on the top right corner, then download the repository as a ZIP file.*)
+    Download the repository **AlignmentCost** (https://github.com/xr-cc/AlignmentCost) to local (*click on the green **Code** button on the top right corner, then download the repository as a ZIP file.*)
 
-    Unzip the file. 
+    Unzip the file **AlignmentCost-main.zip**. 
     
-    Navigate to the directory (using command ```cd```). You should now be under the main ```AlignmentCost-main/``` directory which contains this [README.md](README.md) file.
+    Navigate to the directory '''AlignmentCost-main''' (using the command ```cd```). You should now be under the main ```AlignmentCost-main/``` directory which contains the *README.md* file and the *setup.py* file. 
+    
+    Then, to install the package, type
 
     ```
     pip install -e .
@@ -88,6 +94,11 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
     ```
     pip install git+https://github.com/xr-cc/AlignmentCost
+    ```
+    
+    This will install only the contents in the *AlignmentCost* folder but not the *data* folder and the *demo* folder. The package will be installed to your default path of site-packages for Python. You can view its location by running the following command:
+    ```
+    pip show AlignmentCost
     ```
 
 ## How to Use
