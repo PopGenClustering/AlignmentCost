@@ -101,9 +101,12 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     pip show AlignmentCost
     ```
 
+* The *AlignmentCost.egg-info* folder will be automatically generated upon installation, and you can ignore this folder. You also don't need to change anything in the file *setup.py*.
+
 ## How to Use
 
 > You may run the following toy example to check if the package is installed successfully.
+> NOTE: You may run this part from any directory.
 
 ### How to calculate the alignment cost from a membership coefficient matrix
  
@@ -124,7 +127,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     
   * Load the membership matrix. 
   
-    Here we use a toy example of an 8x4 membership matrix. Each row stands for a individual and each column stands for a cluster. The entires of the matrix correspond to the membership coefficients of individuals for each of the clusters.
+    Here we use a toy example of an 8x4 membership matrix. Each row stands for a individual and each column stands for a cluster. The entries of the matrix correspond to the membership coefficients of 8 individuals for each of 4 clusters.
     ```python
     Q = np.array([
     [0.15,0.25,0.59,0.01],
@@ -151,6 +154,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     ```
     a=(41.716,50.887,133.328,7.592)
     ```
+    This line represents an estimate of Dirichlet parameters $(a_1,a_2,a_3,a_4)$.
     
   * Verify the estimation by comparing the mean and variance of the empirical data and the estimated distribution.
     ```python
@@ -161,14 +165,14 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     
     est_mean, est_var = dir_mean_var(a)
     print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_mean])))
-    print("Dirichlet mean: {}".format(" ".join(["{:.3f}".format(i) for i in est_var])))
+    print("Dirichlet variance: {}".format(" ".join(["{:.3f}".format(i) for i in est_var])))
     ```
      You should get the following lines:
     ```
     empirical mean: 0.177 0.216 0.568 0.039
     empirical variance: 0.001 0.001 0.001 0.001
     Dirichlet mean: 0.179 0.218 0.571 0.033
-    Dirichlet mean: 0.001 0.001 0.001 0.000
+    Dirichlet variance: 0.001 0.001 0.001 0.000
     ```
     
   * Compute alignment cost for specific permutation pattern. 
@@ -189,9 +193,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     ```
     permutation: 1 2 3 4, cost: 0.000
     ```
-    For this toy example Q matrix, if you choose `permutation = np.array([0,1,3,2])`, then you will get `permutation: 1 2 4 3, cost: 0.290`.
-    
-    If you choose `permutation = np.array([1,0,2,3])`, then you will get `permutation: 2 1 3 4, cost: 0.002`.
+    For this toy example Q matrix, if you set the permutation to be `permutation = np.array([0,1,3,2])`, then after repeating the above commands, you will get `permutation: 1 2 4 3, cost: 0.290`. If you set the permutation to be `permutation = np.array([1,0,2,3])`, then you will get `permutation: 2 1 3 4, cost: 0.002`.
 
   * Quit Python.
     ```
@@ -206,6 +208,7 @@ python demo/compute_alignment_cost_from_Q_demo.py
 
 ------
 > You may run the following parts to perform data analysis using the alignment cost.
+> NOTE: Please run these parts from the directory ```AlignmentCost-main/```.
 
 ### How to run the data analysis in the article 
 You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article.
