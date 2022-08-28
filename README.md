@@ -1,9 +1,9 @@
 Alignment Cost
 ------
-#### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering"**. 
-It contains all datasets used as examples and the code (in a Python package ```AlignmentCost```) to perform the empirical data analysis described in the article. 
+#### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering."**
+It contains all datasets used as examples and the code (in a Python package **AlignmentCost**) to perform the empirical data analysis described in the article. 
 
-[*Last edited by Xiran Liu, 7/22/2022*]
+[*Last edited by Xiran Liu, 8/27/2022*]
 
 ------
 
@@ -39,14 +39,14 @@ The **data** folder contains the input data files (in [data/input/](data/input))
   
     We **modified the ordering** of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in *Fortier et al. 2020*. Besides the reordering, there is no change to the data.
 
-     * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of *Fortier et al. 2020* Supplementary, modified by reordering. 
-     * *all_loci_analysis_perm_file.txt* and *codis_loci_analysis_perm_file.txt* are taken from the middle parts of *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files that contain the permutation information of the aligned replicates.
+     * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from files *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of the *Fortier et al. 2020* Supplementary Materials, modified by reordering. 
+     * *all_loci_analysis_perm_file.txt* and *codis_loci_analysis_perm_file.txt* are taken from the middle parts of the *Fortier et al. 2020* files named *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files that contain the permutation information of the aligned replicates.
 
 2. **Script files**: The **scripts** folder contains 
-   * the parameter files used for the examples (more details in the later section)
-   * a sample bash script with the command line argument 
+   * the parameter files used for the examples (more details in a later section).
+   * a sample bash script with the command line argument. 
 
-3. **Output files**: The **output** folder will be automatically generated if run the provided examples. Figures will be output to this folder.
+3. **Output files**: The **output** folder will be automatically generated when running the examples provided. Figures will be output to this folder.
 
 ## How to Install
 
