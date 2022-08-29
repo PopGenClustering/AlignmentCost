@@ -106,6 +106,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 ## How to Use
 
 > You may run the following toy example to check if the package is installed successfully.
+
 **NOTE 3. You may run this part from any directory.**
 
 ### How to calculate the alignment cost from a membership coefficient matrix
@@ -208,6 +209,7 @@ python demo/compute_alignment_cost_from_Q_demo.py
 
 ------
 > You may run the following parts to perform data analysis using the alignment cost.
+
 **NOTE 4. Please run these parts from the directory ```AlignmentCost-main/```.**
 
 ### How to run the data analysis in the article 
