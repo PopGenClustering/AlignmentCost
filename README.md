@@ -3,7 +3,7 @@ Alignment Cost
 #### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering."**
 It contains all datasets used as examples and the code (in a Python package **AlignmentCost**) to perform the empirical data analysis described in the article. 
 
-[*Last edited by Xiran Liu, 8/27/2022*]
+[*Last edited by Xiran Liu, 8/29/2022*]
 
 ------
 
@@ -18,7 +18,7 @@ This README file describes the following:
 ## Contents
 
 * [AlignmentCost](AlignmentCost): the folder containing the code files.
-* [demo](demo): the folder containing the demonstration of how to calculate alignment cost given membership matrix.
+* [demo](demo): the folder containing the demonstration of how to calculate the alignment cost given a membership matrix.
 * [data](data): the folder containing the data analysis scripts used for generating Fig. 5 and 6 in the article.
 
 #### [AlignmentCost](AlignmentCost)
@@ -37,13 +37,13 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
 1. **Input data files**: the **data/input** folder contains four data files taken from the Supplementary materials of *Fortier et al. 2020* that we used for the empirical anlaysis. 
   
-    We **modified the ordering** of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of the Fig. 2 in *Fortier et al. 2020*. Besides the reordering, there is no change to the data.
+    We **modified the ordering** of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of Fig. 2 in *Fortier et al. 2020*. Besides the reordering, there is no change to the data.
 
-     * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from files *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of the *Fortier et al. 2020* Supplementary Materials, modified by reordering. 
+     * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from files *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of the *Fortier et al. 2020* Supplementary Materials, and have been modified from *Fortier et al. 2020* by reordering. 
      * *all_loci_analysis_perm_file.txt* and *codis_loci_analysis_perm_file.txt* are taken from the middle parts of the *Fortier et al. 2020* files named *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files that contain the permutation information of the aligned replicates.
 
 2. **Script files**: The **scripts** folder contains 
-   * the parameter files used for the examples (more details in a later section).
+   * the parameter files used for the examples (more details appear below in a later section).
    * a sample bash script with the command line argument. 
 
 3. **Output files**: The **output** folder will be automatically generated when running the examples provided. Figures will be output to this folder.
@@ -140,7 +140,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     [0.15,0.22,0.57,0.06]])
     ```
   
-  * Use fixed point algorithm to perform MLE (maximum likelihood estimation) of the Dirichlet parameters.
+  * Use a fixed-point algorithm to perform MLE (maximum likelihood estimation) of the Dirichlet parameters.
     ```python
     a0 = initial_guess(Q)
     a = fixed_point(Q, a0)
@@ -175,13 +175,13 @@ The **data** folder contains the input data files (in [data/input/](data/input))
     Dirichlet variance: 0.001 0.001 0.001 0.000
     ```
     
-  * Compute alignment cost for specific permutation pattern. 
+  * Compute the alignment cost for a specific permutation pattern. 
   
-    For instance, without any permutation, run
+    For instance, with the identity permutation, run
     ```python
     permutation = np.array([0,1,2,3])
     ```
-    Note that Python uses zero-based indexing.
+    Note that Python uses zero-based indexing but we label clusters $1,2,\ldots,K$. Hence, Python's $(0,1,2,3)$ refers to clusters $(1,2,3,4)$, for example.
     
     Then run
     ```python
@@ -211,7 +211,7 @@ python demo/compute_alignment_cost_from_Q_demo.py
 > NOTE: Please run these parts from the directory ```AlignmentCost-main/```.
 
 ### How to run the data analysis in the article 
-You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article.
+You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article. This involves running scripts on a parameter file.
 
   * For *STRUCTURE* replicates based on the full set of 791 loci (Fig. 5):
     ```
@@ -229,17 +229,17 @@ You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article.
     1. `all_replicates.pdf`: the stacked bar plots of all replicates (not aligned yet).
     2. `theoretical_cost.pdf`: a heatmap of pairwise theoretical cost between replicates.
     3. `empirical_cost.pdf`: a heatmap of pairwise empirical cost between replicates.
-    4. `cost_difference.pdf`: a heatmap of the relative different between the two costs.
-    5. `cost_vs_perm_rep1.pdf`: a cost vs. permutation plot showing all the possible permutations of clusters with respect to the first replicate (rep1) and their theoretical alignment cost, together with bars showing the empirical costs from the rest of the replicates. The permutations (alignment) of the subsequent replicates w.r.t. the first one are generated by *CLUMPP*.
+    4. `cost_difference.pdf`: a heatmap of the relative difference between the two costs.
+    5. `cost_vs_perm_rep1.pdf`: a cost vs. permutation plot showing all the possible permutations of clusters with respect to the first replicate (rep1) and their theoretical alignment cost, together with bars showing the empirical costs from the rest of the replicates. For these empirical costs, the permutations (alignment) of the subsequent replicates w.r.t. the first one are those permutations that are present in the *CLUMPP* output file used as the input.
 
 ### How to run the analysis on your own data
   ```
   python -m AlignmentCost.main --param_file PATH_TO_YOUR_OWN_PARAMETER_FILE
   ```
   ```PATH_TO_YOUR_OWN_PARAMETER_FILE``` should contain information about your own data, where 
-  1. ```input_file``` points to a **space-delimited** input file in the same format as the example file  [```data/input/all_loci_analysis_input_file.txt```](data/input/all_loci_analysis_input_file.txt). It should contain 5+K columns, where K is the number of clusters in the replicates. The 2nd column contains the individual identifier number and the 4th column contains the population identifier number. It follows the *CLUMPP* individual input file format. The path must be wrapped by quotes, as in the example parameter file.
-  2. ```perm_file``` points to a **space-delimited** file containing the correct permutations (alignment) with respect to the first replicate. The file should be in the same format as the example file  [```data/input/all_loci_analysis_perm_file.txt```](data/input/all_loci_analysis_perm_file.txt). Each row corresponds to the permutation of one replicate, and each column corresponds to a cluster. The first row should always be ```1 2 ... K```. These rows correponding to the permutations can be extracted from the middle part of the output miscellaneous file *miscfile.txt* of *CLUMPP*. In the miscellaneous file, these rows can be found following the text *"the list of permutations of the clusters that produces that H value is (runs are listed sequentially on separate rows)"*. The path to file containing these rows must be wrapped by quotes, as in the example parameter file. 
-  3. ```output_path``` points to the directory where you want to save your output figures. The path must be wrapped by quotes, as in the examplary file.
+  1. ```input_file``` points to a **space-delimited** input file in the same format as the example file  [```data/input/all_loci_analysis_input_file.txt```](data/input/all_loci_analysis_input_file.txt). It should contain 5+K columns, where K is the number of clusters in the replicates. The 2nd column contains the individual identifier number and the 4th column contains the population identifier number. It follows the *CLUMPP* individual input file format. The path must be wrapped by quotes, as in the example parameter file located in ```data/scripts```.
+  2. ```perm_file``` points to a **space-delimited** file containing the correct permutations (alignment) with respect to the first replicate. The file should be in the same format as the example file  [```data/input/all_loci_analysis_perm_file.txt```](data/input/all_loci_analysis_perm_file.txt). Each row corresponds to the permutation of one replicate, and each column corresponds to a cluster. The first row should always be ```1 2 ... K```. These rows correponding to the permutations can be extracted from the middle part of the output miscellaneous file *miscfile.txt* of *CLUMPP*. In the miscellaneous file, these rows can be found following the text *"the list of permutations of the clusters that produces that H value is (runs are listed sequentially on separate rows)"*. The path to the file containing these rows must be wrapped by quotes, as in the example parameter file located in ```data/scripts```. 
+  3. ```output_path``` points to the directory where you want to save your output figures. The path must be wrapped by quotes, as in the example file.
   4. ```R``` is the number of replicates.
   5. ```vmax``` is a number to specify the upper limit of the colorbar when plotting the heatmap of costs (Panel B and C). You may leave it as the default value 1.0.
   6. ```cost_vs_perm_label_above_bar``` is either ```True``` or ```False```, depending on where you want the labels of the empirical costs to be in Panel E.
