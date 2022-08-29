@@ -37,7 +37,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
 1. **Input data files**: the **data/input** folder contains four data files taken from the Supplementary materials of *Fortier et al. 2020* that we used for the empirical anlaysis. 
   
-    We **modified the ordering** of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot pattern of the first replicates of both datasets are consistent with that of Fig. 2 in *Fortier et al. 2020*. Besides the reordering, there is no change to the data.
+    We **modified the ordering** of the populations and the ordering of the clusters in the raw *CLUMPP* data files so that the membership barplot patterns of the first replicates of both datasets are consistent with that of Fig. 2 in *Fortier et al. 2020*. Besides the reordering, there is no change to the data.
 
      * *all_loci_analysis_input_file.txt* and *all_codis_analysis_input_file.txt* are taken from files *CLUMPP/CLUMPP_input/all_indfile.txt* and *CLUMPP/CLUMPP_input/codis_indfile.txt* of the *Fortier et al. 2020* Supplementary Materials, and have been modified from *Fortier et al. 2020* by reordering. 
      * *all_loci_analysis_perm_file.txt* and *codis_loci_analysis_perm_file.txt* are taken from the middle parts of the *Fortier et al. 2020* files named *CLUMPP/CLUMPP_output/all_ind_miscfile.txt* and *CLUMPP/CLUMPP_output/codis_ind_miscfile.txt* files that contain the permutation information of the aligned replicates.
@@ -106,7 +106,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 ## How to Use
 
 > You may run the following toy example to check if the package is installed successfully.
-> NOTE: You may run this part from any directory.
+**NOTE 3. You may run this part from any directory.**
 
 ### How to calculate the alignment cost from a membership coefficient matrix
  
@@ -208,7 +208,7 @@ python demo/compute_alignment_cost_from_Q_demo.py
 
 ------
 > You may run the following parts to perform data analysis using the alignment cost.
-> NOTE: Please run these parts from the directory ```AlignmentCost-main/```.
+**NOTE 4. Please run these parts from the directory ```AlignmentCost-main/```.**
 
 ### How to run the data analysis in the article 
 You may reproduce the analysis on the datasets in Fig. 5 and 6 in the article. This involves running scripts on a parameter file.
