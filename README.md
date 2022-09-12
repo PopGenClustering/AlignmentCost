@@ -3,7 +3,7 @@ Alignment Cost
 #### The content of this GitHub repository is identical to the supplementary zip file provided along with the article **"A Dirichlet model of alignment cost in mixed-membership unsupervised clustering."**
 It contains all datasets used as examples and the code (in a Python package **AlignmentCost**) to perform the empirical data analysis described in the article. 
 
-[*Last edited by Xiran Liu, 8/29/2022*]
+[*Last edited by Xiran Liu, 9/12/2022*]
 
 ------
 
@@ -78,7 +78,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
 
   * Download and install the AlignmentCost package from GitHub:
  
-    Download the repository **AlignmentCost** (https://github.com/xr-cc/AlignmentCost) to local (*click on the green **Code** button on the top right corner, then download the repository as a ZIP file.*)
+    Download the repository **AlignmentCost** (https://github.com/PopGenClustering/AlignmentCost) to local (*click on the green **Code** button on the top right corner, then download the repository as a ZIP file.*)
 
     Unzip the file **AlignmentCost-main.zip**. 
     
@@ -93,7 +93,7 @@ The **data** folder contains the input data files (in [data/input/](data/input))
   * Alternatively, you may install the package (without data and example scripts) directly from GitHub [**not recommended**]:
 
     ```
-    pip install git+https://github.com/xr-cc/AlignmentCost
+    pip install git+https://github.com/PopGenClustering/AlignmentCost
     ```
     
     This will install only the contents in the *AlignmentCost* folder but not the *data* folder and the *demo* folder. The package will be installed to your default path of site-packages for Python. You can view its location by running the following command:
